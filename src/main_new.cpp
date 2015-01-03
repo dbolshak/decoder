@@ -18,15 +18,15 @@ int main(int argc, const char** argv)
     CodedInputStream* coded_input = new CodedInputStream(raw_input);
 
     google::protobuf::uint32  magic_number = 0;
-    coded_input->ReadLittleEndian32(&magic_number);
-    cout << "magic number:" << magic_number << endl;
+    //coded_input->ReadLittleEndian32(&magic_number);
+    //cout << "magic number:" << magic_number << endl;
 
-    google::protobuf::uint32 size;
-    coded_input->ReadVarint32(&size);
+    //google::protobuf::uint32 size;
+    //coded_input->ReadVarint32(&size);
 
-    char* text = new char[size + 1];
-    coded_input->ReadRaw(text, size);
-    text[size] = '\0';
+    char text[100000] = {0};
+    coded_input->ReadRaw(text, 100000);
+    //text[size] = '\0';
 
     string outputName = argv[1];
     outputName += ".out";
@@ -38,7 +38,7 @@ int main(int argc, const char** argv)
     close(fd);
 
     cout << "Text is: " << text << endl;
-    delete [] text;
+    //delete [] text;
 
     return 0;
 }
